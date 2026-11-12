@@ -1,8 +1,15 @@
 # Evolutionary Graph Colouring (Python)
 
+![Python](https://img.shields.io/badge/Python-3.8%2B-3776AB?logo=python&logoColor=white)
+![Tests](https://img.shields.io/badge/tests-pytest-0A9EDC?logo=pytest&logoColor=white)
+![Dependencies](https://img.shields.io/badge/dependencies-none-brightgreen)
+![Topic](https://img.shields.io/badge/topic-evolutionary%20algorithms-8A2BE2)
+
 A discrete-event **evolutionary simulation** that approximates the **chromatic number** of a graph: the smallest number of colours needed so that no two connected nodes share a colour. Finding it exactly is NP-hard, so a population of candidate colourings evolves until good solutions emerge.
 
 Group project for *Elements of Programming* (Instituto Superior Técnico, 2023), refactored and documented in 2026.
+
+![Petersen graph coloured with 10 colours at the start and 3 colours after the evolution](figures/petersen_coloring.png)
 
 ## How it works
 
@@ -27,6 +34,10 @@ On the **Petersen graph** (10 nodes, 15 edges, chromatic number 3), with a popul
 
 Each run takes under a second.
 
+![Number of colours of the best valid colouring over time in 20 runs](figures/convergence.png)
+
+Every run starts at 10 colours and drops quickly. Most reach the optimum of 3 before time 45; the rest get stuck at 4, a local optimum that single-node mutations cannot escape.
+
 ## Running it
 
 Requires Python 3.8+ and no external libraries.
@@ -36,6 +47,8 @@ python simulator.py                 # Petersen graph, default settings
 python simulator.py --seed 1 --end-time 200 --population 20
 
 pip install pytest && pytest        # run the tests
+
+pip install matplotlib && python figures/make_figures.py   # regenerate the figures
 ```
 
 ## Project structure
@@ -50,6 +63,7 @@ event_queue.py   # pending-event queue sorted by time
 exprandom.py     # exponential random times
 simulator.py     # the simulation loop and command-line entry point
 tests/           # pytest tests
+figures/         # README figures and the script that draws them
 ```
 
 The code follows an abstract-data-type style: each module exposes small functions that hide how the data is stored.

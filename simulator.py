@@ -26,7 +26,7 @@ def schedule_individual(queue, identifier, now, t_evaluation, t_evolution):
     return queue
 
 
-def simulate(graph, end_time, k, t_evaluation, t_evolution, t_selection):
+def simulate(graph, end_time, k, t_evaluation, t_evolution, t_selection, history=None):
     """Run the simulation and return the best colouring found.
 
     graph        -- graph to colour
@@ -35,6 +35,8 @@ def simulate(graph, end_time, k, t_evaluation, t_evolution, t_selection):
     t_evaluation -- mean time between evaluations of an individual
     t_evolution  -- mean time between evolutions of an individual
     t_selection  -- mean time between selections
+    history      -- optional list; (time, colours of the best valid colouring)
+                    is appended every time the best colouring improves
     """
     queue = eq.new_queue()
     pop = popl.new_population()
@@ -89,6 +91,8 @@ def simulate(graph, end_time, k, t_evaluation, t_evolution, t_selection):
             top = ind.get_coloring(popl.get_individual(pop, popl.ranked(pop, graph)[0]))
             if col.count_defects(graph, top) == 0 and (best is None or col.num_colors(top) < col.num_colors(best)):
                 best = top
+                if history is not None:
+                    history.append((now, col.num_colors(best)))
 
     return best
 
