@@ -1,10 +1,5 @@
 # Evolutionary Graph Colouring (Python)
 
-![Python](https://img.shields.io/badge/Python-3.8%2B-3776AB?logo=python&logoColor=white)
-![Tests](https://img.shields.io/badge/tests-pytest-0A9EDC?logo=pytest&logoColor=white)
-![Dependencies](https://img.shields.io/badge/dependencies-none-brightgreen)
-![Topic](https://img.shields.io/badge/topic-evolutionary%20algorithms-8A2BE2)
-
 A discrete-event **evolutionary simulation** that approximates the **chromatic number** of a graph: the smallest number of colours needed so that no two connected nodes share a colour. Finding it exactly is NP-hard, so a population of candidate colourings evolves until good solutions emerge.
 
 Group project for *Elements of Programming* (Instituto Superior Técnico, 2023), refactored and documented in 2026.
